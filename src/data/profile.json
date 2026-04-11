@@ -1,0 +1,46 @@
+{
+  "name": "高辉",
+  "title": "全栈开发工程师 · 终身学习者",
+  "avatar": "G",
+  "bio": "热爱技术，喜欢折腾。从事前端开发多年，目前专注于全栈方向。业余时间写写博客，记录学习和生活的点滴。坚信持续学习是程序员最好的投资，追求用技术创造价值。",
+  "skills": [
+    { "name": "Vue", "level": 85 },
+    { "name": "React", "level": 75 },
+    { "name": "Node.js", "level": 72 },
+    { "name": "Python", "level": 65 },
+    { "name": "Docker", "level": 68 },
+    { "name": "TypeScript", "level": 78 }
+  ],
+  "timeline": [
+    {
+      "year": "2026",
+      "title": "技术深耕与开源贡献",
+      "description": "持续深耕全栈技术，开始参与开源项目贡献，分享技术经验"
+    },
+    {
+      "year": "2025",
+      "title": "AI 单词卡小程序上线",
+      "description": "独立设计开发并上线了基于艾宾浩斯算法的背单词应用，获得首批用户"
+    },
+    {
+      "year": "2024",
+      "title": "全栈技术转型",
+      "description": "从纯前端转向全栈方向，系统学习后端技术栈（Node.js/Python/Go）"
+    },
+    {
+      "year": "2023",
+      "title": "前端架构师之路",
+      "description": "主导多个大型项目前端架构设计，推动团队工程化建设"
+    },
+    {
+      "year": "2022",
+      "title": "开始写博客",
+      "description": "建立个人技术博客，坚持分享学习心得，累计输出 100+ 篇原创文章"
+    }
+  ],
+  "social": {
+    "github": "https://github.com/gaohui",
+    "email": "gaohui@example.com",
+    "wechat": "gaohui_dev"
+  }
+}

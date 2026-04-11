@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "title": "Vue3 响应式原理深度剖析",
+    "excerpt": "深入理解 Vue3 的响应式系统，包括 Proxy、Reflect、依赖收集与触发更新...",
+    "content": "Vue3 的响应式系统是其核心特性之一，相比 Vue2 的 Object.defineProperty，Vue3 使用了更强大的 Proxy 来实现数据响应式。本文将深入剖析 Vue3 响应式的实现原理。\n\n## 什么是响应式？\n\n响应式是指当数据发生变化时，视图能够自动更新。在 Vue 中，我们只需要修改数据，无需手动操作 DOM，框架会自动帮我们完成更新。\n\n## Proxy 的基本用法\n\nProxy 是 ES6 新增的特性，它可以拦截对象的基本操作，如读取、设置、删除属性等。\n\n```javascript\nconst proxy = new Proxy(target, {\n  get(target, key) { return target[key] },\n  set(target, key, value) {\n    target[key] = value\n    return true\n  }\n})\n```\n\n## 依赖收集\n\nVue3 使用 WeakMap 来存储依赖关系，当组件渲染时，会触发 getter，从而收集依赖。",
+    "category": "技术笔记",
+    "tags": ["Vue", "前端", "JavaScript"],
+    "date": "2026-04-10",
+    "readTime": "8 分钟",
+    "cover": "linear-gradient(135deg, #667eea, #764ba2)"
+  },
+  {
+    "id": 2,
+    "title": "Node.js 性能优化实战技巧",
+    "excerpt": "从架构设计到代码实现，分享 Node.js 应用性能优化的实战经验和最佳实践...",
+    "content": "Node.js 作为后端开发语言，性能优化是非常重要的一环。本文将从多个角度分享 Node.js 性能优化的实战技巧。\n\n## 1. 使用集群模式\n\nNode.js 是单线程的，可以通过 cluster 模块充分利用多核 CPU。\n\n## 2. 内存管理\n\n注意内存泄漏，使用 --inspect 进行调试。\n\n## 3. 异步优化\n\n避免阻塞事件循环，使用 setImmediate 分解密集计算。",
+    "category": "技术笔记",
+    "tags": ["Node", "后端", "性能"],
+    "date": "2026-04-08",
+    "readTime": "12 分钟",
+    "cover": "linear-gradient(135deg, #10b981, #34d399)"
+  },
+  {
+    "id": 3,
+    "title": "Docker 从入门到精通",
+    "excerpt": "Docker 核心概念、镜像构建、私有仓库搭建，以及在生产环境中的最佳实践...",
+    "content": "Docker 是现代开发运维的必备技能。本文将带你从入门到精通掌握 Docker。\n\n## 核心概念\n\n- 镜像（Image）\n- 容器（Container）\n- 仓库（Registry）\n\n## Dockerfile 最佳实践\n\n使用多阶段构建减小镜像体积。",
+    "category": "技术笔记",
+    "tags": ["Docker", "DevOps", "容器"],
+    "date": "2026-04-05",
+    "readTime": "15 分钟",
+    "cover": "linear-gradient(135deg, #f59e0b, #fbbf24)"
+  },
+  {
+    "id": 4,
+    "title": "TypeScript 类型体操进阶",
+    "excerpt": "通过实际案例讲解 TypeScript 高级类型技巧，提升代码的类型安全性和可维护性...",
+    "content": "TypeScript 的类型系统非常强大，掌握高级类型技巧可以极大提升代码质量。\n\n## 条件类型\n\n使用 extends 实现条件判断。\n\n## 映射类型\n\n使用 in 遍历联合类型。\n\n## 模板字面量类型\n\n字符串模板类型的妙用。",
+    "category": "技术笔记",
+    "tags": ["TypeScript", "前端"],
+    "date": "2026-04-02",
+    "readTime": "10 分钟",
+    "cover": "linear-gradient(135deg, #ef4444, #f87171)"
+  },
+  {
+    "id": 5,
+    "title": "Git 工作流完全指南",
+    "excerpt": "对比 Git Flow、GitHub Flow、Trunk-Based Development 等常见工作流的选择...",
+    "content": "选择合适的 Git 工作流对团队协作至关重要。\n\n## Git Flow\n\n适合有明确发布周期的项目。\n\n## GitHub Flow\n\n简单直接，适合持续部署。\n\n## Trunk-Based Development\n\n主干开发，适合 CI/CD 成熟的团队。",
+    "category": "技术笔记",
+    "tags": ["Git", "团队协作"],
+    "date": "2026-03-28",
+    "readTime": "7 分钟",
+    "cover": "linear-gradient(135deg, #8b5cf6, #a78bfa)"
+  },
+  {
+    "id": 6,
+    "title": "我的 2025 年终总结",
+    "excerpt": "回顾这一年的成长与收获，技术提升、生活变化、以及对新一年的展望和规划...",
+    "content": "2025 年是充实的一年，技术上有很大提升，生活也有很多变化。\n\n## 技术成长\n\n从纯前端转向全栈，系统学习了后端技术。\n\n## 生活感悟\n\n坚持运动，保持学习，生活更加规律。\n\n## 新年计划\n\n继续深耕全栈，开启副业探索。",
+    "category": "生活感悟",
+    "tags": ["年终总结", "生活"],
+    "date": "2026-03-20",
+    "readTime": "5 分钟",
+    "cover": "linear-gradient(135deg, #06b6d4, #22d3ee)"
+  },
+  {
+    "id": 7,
+    "title": "Redis 实战：缓存策略详解",
+    "excerpt": "深入理解 Redis 缓存策略，包括缓存穿透、缓存击穿、缓存雪崩的解决方案...",
+    "content": "Redis 作为缓存中间件，正确使用缓存策略至关重要。\n\n## 缓存穿透\n\n使用布隆过滤器或空值缓存。\n\n## 缓存击穿\n\n使用互斥锁或逻辑过期。\n\n## 缓存雪崩\n\n设置随机过期时间，使用高可用架构。",
+    "category": "技术笔记",
+    "tags": ["Redis", "数据库", "缓存"],
+    "date": "2026-03-15",
+    "readTime": "9 分钟",
+    "cover": "linear-gradient(135deg, #ec4899, #f472b6)"
+  },
+  {
+    "id": 8,
+    "title": "《代码整洁之道》读书笔记",
+    "excerpt": "总结《代码整洁之道》的核心观点，如何写出可读性更强、更易维护的代码...",
+    "content": "Robert C. Martin 的经典之作，值得每个程序员反复阅读。\n\n## 有意义的命名\n\n变量、函数、类名要能表达其意图。\n\n## 函数\n\n函数应该短小，只做一件事。\n\n## 注释\n\n好的代码是最好的注释，注释是失败的标志。",
+    "category": "读书笔记",
+    "tags": ["读书", "代码质量"],
+    "date": "2026-03-10",
+    "readTime": "6 分钟",
+    "cover": "linear-gradient(135deg, #14b8a6, #2dd4bf)"
+  }
+]
