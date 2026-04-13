@@ -1,11 +1,27 @@
 <template>
   <div class="article-list">
     <h2 class="section-title">📝 文章列表</h2>
-    
+
+    <!-- 分类标签栏 -->
+    <div class="category-tabs">
+      <button
+        v-for="cat in categories"
+        :key="cat"
+        class="category-tab"
+        :class="{ active: selectedCategory === cat }"
+        @click="selectedCategory = cat"
+      >
+        {{ cat }}
+      </button>
+    </div>
+
     <div class="article-list-container">
-      <div class="article-items">
-        <router-link 
-          v-for="article in filteredArticles" 
+      <div v-if="filteredArticles.length === 0" class="empty-hint">
+        <p>该分类暂无文章</p>
+      </div>
+      <div v-else class="article-items">
+        <router-link
+          v-for="article in filteredArticles"
           :key="article.id"
           :to="`/article/${article.id}`"
           class="article-list-item"
@@ -27,9 +43,30 @@
 </template>
 
 <script setup>
-import { useArticles } from '@/composables/useArticles'
+import { ref, computed, onMounted } from 'vue'
+import { articleStore } from '@/composables/articlesStore'
 
-const { filteredArticles } = useArticles()
+// 确保文章数据已加载
+onMounted(() => {
+  articleStore.load()
+})
+
+// 分类选项
+const categories = computed(() => {
+  const cats = new Set(articleStore.articles.value.map(a => a.category))
+  return ['全部', ...cats]
+})
+
+const selectedCategory = ref('全部')
+
+// 筛选后的文章列表
+const filteredArticles = computed(() => {
+  const all = articleStore.articles.value
+  if (!all || all.length === 0) return []
+  const sorted = [...all].sort((a, b) => new Date(b.date) - new Date(a.date))
+  if (selectedCategory.value === '全部') return sorted
+  return sorted.filter(a => a.category === selectedCategory.value)
+})
 </script>
 
 <style scoped>
@@ -45,7 +82,51 @@ const { filteredArticles } = useArticles()
   color: var(--text);
 }
 
+/* 分类标签栏 */
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.category-tab {
+  padding: 7px 18px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.category-tab:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.category-tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.empty-hint {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px 0;
+}
+
 .article-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-items {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -113,7 +194,7 @@ const { filteredArticles } = useArticles()
   .article-list-item {
     flex-direction: column;
   }
-  
+
   .article-list-cover {
     width: 100%;
     height: 120px;
