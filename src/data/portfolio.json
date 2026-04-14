@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "AI 单词卡小程序",
+    "description": "基于艾宾浩斯遗忘曲线的智能背单词应用，支持语音识别、自动复习提醒、学习数据统计等功能",
+    "tags": ["Vue3", "Node.js", "MongoDB", "微信小程序"],
+    "category": "frontend",
+    "cover": "linear-gradient(135deg, #667eea, #764ba2)",
+    "demo": "https://example.com/wordcard",
+    "github": "https://github.com/gaohui/wordcard"
+  },
+  {
+    "id": 2,
+    "title": "个人博客系统",
+    "description": "支持多主题切换、Markdown 编辑器的全栈博客平台，包含文章管理、评论系统、数据统计",
+    "tags": ["Next.js", "Prisma", "PostgreSQL", "TailwindCSS"],
+    "category": "frontend",
+    "cover": "linear-gradient(135deg, #10b981, #34d399)",
+    "demo": "https://example.com/blog",
+    "github": "https://github.com/gaohui/blog"
+  },
+  {
+    "id": 3,
+    "title": "股票分析工具",
+    "description": "实时行情展示、K线图绘制、持仓管理与盈亏分析的股票投资辅助工具",
+    "tags": ["React", "Python", "FastAPI", "ECharts"],
+    "category": "backend",
+    "cover": "linear-gradient(135deg, #f59e0b, #fbbf24)",
+    "demo": "https://example.com/stock",
+    "github": "https://github.com/gaohui/stock-analyzer"
+  },
+  {
+    "id": 4,
+    "title": "设计规范系统",
+    "description": "企业级设计规范平台，包含组件库、设计令牌管理、交互文档与版本管理",
+    "tags": ["Figma", "Storybook", "Design Token", "React"],
+    "category": "design",
+    "cover": "linear-gradient(135deg, #ef4444, #f87171)",
+    "demo": "https://example.com/design-system",
+    "github": "https://github.com/gaohui/design-system"
+  },
+  {
+    "id": 5,
+    "title": "DevOps 自动化平台",
+    "description": "CI/CD 流水线编排、容器编排管理、监控告警一体化的 DevOps 平台",
+    "tags": ["Go", "Docker", "K8s", "Prometheus"],
+    "category": "other",
+    "cover": "linear-gradient(135deg, #8b5cf6, #a78bfa)",
+    "demo": "https://example.com/devops",
+    "github": "https://github.com/gaohui/devops-platform"
+  }
+]

@@ -1,0 +1,49 @@
+# GitHub Actions: Sync Articles to GitHub Pages
+# 手动触发或接收后台发布的文章内容，更新 articles.json 并部署
+
+name: Sync Articles
+
+on:
+  workflow_dispatch:
+    inputs:
+      articles_content:
+        description: 'Base64 encoded articles JSON'
+        required: true
+        type: string
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          sparse-checkout: |
+            articles.json
+            index.html
+            assets
+            sw.js
+            workbox-*.js
+            manifest.webmanifest
+            robots.txt
+            404.html
+          sparse-checkout-cone-mode: false
+
+      - name: Decode articles content
+        run: |
+          echo "${{ inputs.articles_content }}" | base64 -d > articles.json
+          cat articles.json
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          force_orphan: false

@@ -18,32 +18,23 @@
         <span class="search-text">搜索</span>
         <kbd class="search-kbd">Ctrl+K</kbd>
       </button>
-      <router-link 
-        v-if="adminLoggedIn" 
-        to="/admin" 
-        class="nav-admin-btn"
-      >
-        管理后台
-      </router-link>
       <div class="avatar">G</div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { isLoggedIn } from '@/composables/useAdminAuth'
 
 const emit = defineEmits(['openSearch'])
 const route = useRoute()
 const isScrolled = ref(false)
 
-const adminLoggedIn = computed(() => isLoggedIn())
-
 const navLinks = [
   { name: '首页', path: '/' },
   { name: '文章', path: '/article' },
+  { name: '作品集', path: '/portfolio' },
   { name: '关于', path: '/about' }
 ]
 
@@ -59,10 +50,12 @@ const handleScroll = () => {
 }
 
 const handleKeydown = (e) => {
+  // / 键打开搜索（不在输入框中时）
   if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
     e.preventDefault()
     emit('openSearch')
   }
+  // Ctrl+K 打开搜索
   if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
     e.preventDefault()
     emit('openSearch')
@@ -174,21 +167,6 @@ onUnmounted(() => {
   color: var(--text-secondary);
 }
 
-.nav-admin-btn {
-  padding: 6px 14px;
-  border-radius: var(--radius);
-  background: var(--primary);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.nav-admin-btn:hover {
-  opacity: 0.85;
-}
-
 .avatar {
   width: 36px;
   height: 36px;
@@ -214,10 +192,6 @@ onUnmounted(() => {
 
   .nav-search-btn {
     padding: 8px 10px;
-  }
-
-  .nav-admin-btn {
-    display: none;
   }
 }
 </style>

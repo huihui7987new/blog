@@ -22,19 +22,6 @@
 
     <div class="article-content markdown-body" v-html="renderedContent"></div>
 
-    <!-- 项目链接块 -->
-    <div v-if="article.links" class="project-links">
-      <div class="project-links-title">🔗 项目链接</div>
-      <div class="project-links-row">
-        <a v-if="article.links.demo" :href="article.links.demo" target="_blank" rel="noopener" class="project-link project-demo">
-          🔗 在线体验
-        </a>
-        <a v-if="article.links.github" :href="article.links.github" target="_blank" rel="noopener" class="project-link project-github">
-          📁 源码地址
-        </a>
-      </div>
-    </div>
-
     <div class="author-card">
       <div class="author-avatar">G</div>
       <div class="author-info">
@@ -105,15 +92,13 @@ hljs.registerLanguage('yml', yaml)
 hljs.registerLanguage('go', go)
 hljs.registerLanguage('rust', rust)
 
-import { articleStore } from '@/composables/articlesStore'
+import { useArticles } from '@/composables/useArticles'
 import CommentSection from '@/components/CommentSection.vue'
 
 const route = useRoute()
+const { getArticleById, articles } = useArticles()
 
-// 直接从 articleStore 读取，响应式
-const article = computed(() => {
-  return articleStore.articles.value.find(a => a.id === parseInt(route.params.id))
-})
+const article = computed(() => getArticleById(route.params.id))
 
 // Configure marked with highlight.js
 marked.setOptions({
@@ -136,19 +121,19 @@ const renderedContent = computed(() => {
 
 const currentIndex = computed(() => {
   if (!article.value) return -1
-  return articleStore.articles.value.findIndex(a => a.id === article.value.id)
+  return articles.value.findIndex(a => a.id === article.value.id)
 })
 
 const prevArticle = computed(() => {
-  if (currentIndex.value < articleStore.articles.value.length - 1) {
-    return articleStore.articles.value[currentIndex.value + 1]
+  if (currentIndex.value < articles.value.length - 1) {
+    return articles.value[currentIndex.value + 1]
   }
   return null
 })
 
 const nextArticle = computed(() => {
   if (currentIndex.value > 0) {
-    return articleStore.articles.value[currentIndex.value - 1]
+    return articles.value[currentIndex.value - 1]
   }
   return null
 })
@@ -247,62 +232,6 @@ onMounted(() => {
   background: linear-gradient(135deg, var(--primary), var(--primary-end));
 }
 
-/* 项目链接块 */
-.project-links {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin: 28px 0;
-}
-
-.project-links-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 14px;
-}
-
-.project-links-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 20px;
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-.project-demo {
-  background: var(--primary);
-  color: #fff;
-}
-
-.project-demo:hover {
-  opacity: 0.88;
-  transform: translateY(-1px);
-}
-
-.project-github {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text);
-}
-
-.project-github:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  transform: translateY(-1px);
-}
-
 .author-card {
   display: flex;
   gap: 16px;
@@ -393,16 +322,6 @@ onMounted(() => {
   font-size: 20px;
   margin-bottom: 20px;
   color: var(--text-secondary);
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 24px;
-  background: var(--primary);
-  color: #fff;
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-size: 14px;
 }
 
 @media (max-width: 768px) {

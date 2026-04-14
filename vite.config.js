@@ -2,27 +2,10 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import { fileURLToPath, URL } from 'node:url'
-import fs from 'node:fs'
-import path from 'node:path'
-
-// 构建后自动生成 404.html（SPA fallback for GitHub Pages）
-function copyIndexTo404() {
-  return {
-    name: 'copy-index-to-404',
-    closeBundle() {
-      const src = path.resolve('dist/index.html')
-      const dest = path.resolve('dist/404.html')
-      fs.copyFileSync(src, dest)
-      console.log('✅ 404.html generated from index.html')
-    }
-  }
-}
 
 export default defineConfig({
-  base: '/blog/',
   plugins: [
     vue(),
-    copyIndexTo404(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt'],
